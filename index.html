@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="pages/index.css" />
+    <title>mesto</title>
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="images/logo.svg" alt="логотип" />
+      <div class="header__line"></div>
+    </header>
+    <section class="profile">
+      <img class="profile__avatar" src="images/image.jpg" alt="" />
+      <div class="profile__info">
+        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button popup-open">
+          <img
+            class="profile__image-button"
+            src="images/Edit Button.svg"
+            alt="кнопка"
+          />
+        </button>
+        <p class="profile__text">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button">
+        <img
+          class="profile__button-img"
+          src="images/Add Button.svg"
+          alt="кнопка"
+        />
+      </button>
+    </section>
+
+    <section class="elements">
+      <ul class="elements__element">
+        <li class="element__item">
+          <img
+            class="element__images"
+            src="images/karachaevsk.jpg"
+            alt="фото"
+          />
+          <div class="element__group">
+            <h2 class="element__title">Карачаевск</h2>
+            <button class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element__item">
+          <img class="element__images" src="images/elbrus.jpg" alt="фото" />
+          <div class="element__group">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element__item">
+          <img class="element__images" src="images/dombai.jpg" alt="фото" />
+          <div class="element__group">
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element__item">
+          <img
+            class="element__images"
+            src="images/karachaevsk.jpg"
+            alt="фото"
+          />
+          <div class="element__group">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element__item">
+          <img class="element__images" src="images/elbrus.jpg" alt="фото" />
+          <div class="element__group">
+            <h2 class="element__title">Домбай</h2>
+            <button class="element__btn"></button>
+          </div>
+        </li>
+        <li class="element__item">
+          <img class="element__images" src="images/dombai.jpg" alt="фото" />
+          <div class="element__group">
+            <h2 class="element__title">Карачаево-Ч...</h2>
+            <button class="element__btn"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2022. Олег Самойленко</p>
+    </footer>
+    <div class="popup">
+      <form class="popup__container">
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="закрыть окно"
+        ></button>
+        <div class="popup__main-container">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <fieldset
+            class="popup__input-container popup__input-container_ctrl_texts"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder=""
+              value="Жак-Ив Кусто"
+              class="popup__item popup__item_el_heading"
+            />
+            <input
+              type="text"
+              name="name"
+              placeholder=""
+              value="Исследователь океана"
+              class="popup__item popup__item_el_subheading"
+            />
+          </fieldset>
+          <button class="popup__btn"></button>
+        </div>
+      </form>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

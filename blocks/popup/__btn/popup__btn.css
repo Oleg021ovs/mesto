@@ -1,0 +1,19 @@
+.popup__btn {
+    background-image: url(../../../images/Submit\ Button.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 358px;
+    height: 50px;
+    cursor: pointer;
+    margin: 48px 36px 37px 36px;
+   }
+
+   @media screen and (max-width: 768px) {
+    .popup__btn{
+     margin: 0 auto;
+     width: 238px;
+     height: 46px;
+     margin-top: 45px;
+    }
+}
