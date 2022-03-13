@@ -4,4 +4,4 @@
 
 ### В этом проекте я использовал html и css и Javascript flex box и grid, все написано по методологи БЭМ!))) и конечно же АДАПТИВ! Верстал сайт по макету из Figma! весь проект верстал в vsCode!
 
-[Ссылка на мою работу] (https://https://github.com/Oleg021ovs/mesto)
+[Ссылка на мою работу] (https://github.com/Oleg021ovs/mesto)
