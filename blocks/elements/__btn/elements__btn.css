@@ -7,4 +7,10 @@
     cursor: pointer;
     background-color: transparent;
     margin-right: 30px;
+    padding: 0;
+}
+
+.elements__btn:hover {
+    opacity: 0.5;
+    
 }

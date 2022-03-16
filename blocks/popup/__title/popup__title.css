@@ -5,6 +5,9 @@
     font-style: normal;
     color: #000000;
     margin: 34px 64px 0 36px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     
 }
 

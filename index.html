@@ -10,90 +10,86 @@
   <body class="page">
     <header class="header">
       <img class="header__logo" src="images/logo.svg" alt="логотип" />
-      <div class="header__line"></div>
     </header>
-    <section class="profile">
-      <img class="profile__avatar" src="images/image.jpg" alt="" />
-      <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button popup-open">
-          <img
-            class="profile__image-button"
-            src="images/EditButton.svg"
-            alt="кнопка"
-          />
-        </button>
-        <p class="profile__text">Исследователь океана</p>
-      </div>
-      <button class="profile__add-button">
+    <main class="main">
+      <section class="profile">
         <img
-          class="profile__button-img"
-          src="images/AddButton.svg"
-          alt="кнопка"
+          class="profile__avatar"
+          src="images/image.jpg"
+          alt="фото профиля"
         />
-      </button>
-    </section>
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button
+            class="profile__edit-button popup-open"
+            type="button"
+          ></button>
+          <p class="profile__text">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
 
-    <section class="elements">
-      <ul class="elements__element">
-        <li class="elements__item">
-          <img
-            class="elements__images"
-            src="images/karachaevsk.jpg"
-            alt="фото"
-          />
-          <div class="elements__group">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button class="elements__btn"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img class="elements__images" src="images/elbrus.jpg" alt="фото" />
-          <div class="elements__group">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__btn"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img class="elements__images" src="images/dombai.jpg" alt="фото" />
-          <div class="elements__group">
-            <h2 class="elements__title">Домбай</h2>
-            <button class="elements__btn"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img
-            class="elements__images"
-            src="images/karachaevsk.jpg"
-            alt="фото"
-          />
-          <div class="elements__group">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button class="elements__btn"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img class="elements__images" src="images/elbrus.jpg" alt="фото" />
-          <div class="elements__group">
-            <h2 class="elements__title">Домбай</h2>
-            <button class="elements__btn"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img class="elements__images" src="images/dombai.jpg" alt="фото" />
-          <div class="elements__group">
-            <h2 class="elements__title">Карачаево-Ч...</h2>
-            <button class="elements__btn"></button>
-          </div>
-        </li>
-      </ul>
-    </section>
+      <section class="elements">
+        <ul class="elements__element">
+          <li class="elements__item">
+            <img
+              class="elements__images"
+              src="images/karachaevsk.jpg"
+              alt="фото"
+            />
+            <div class="elements__group">
+              <h2 class="elements__title">Карачаевск</h2>
+              <button class="elements__btn" type="button"></button>
+            </div>
+          </li>
+          <li class="elements__item">
+            <img class="elements__images" src="images/elbrus.jpg" alt="фото" />
+            <div class="elements__group">
+              <h2 class="elements__title">Гора Эльбрус</h2>
+              <button class="elements__btn" type="button"></button>
+            </div>
+          </li>
+          <li class="elements__item">
+            <img class="elements__images" src="images/dombai.jpg" alt="фото" />
+            <div class="elements__group">
+              <h2 class="elements__title">Домбай</h2>
+              <button class="elements__btn" type="button"></button>
+            </div>
+          </li>
+          <li class="elements__item">
+            <img
+              class="elements__images"
+              src="images/karachaevsk.jpg"
+              alt="фото"
+            />
+            <div class="elements__group">
+              <h2 class="elements__title">Гора Эльбрус</h2>
+              <button class="elements__btn" type="button"></button>
+            </div>
+          </li>
+          <li class="elements__item">
+            <img class="elements__images" src="images/elbrus.jpg" alt="фото" />
+            <div class="elements__group">
+              <h2 class="elements__title">Домбай</h2>
+              <button class="elements__btn" type="button"></button>
+            </div>
+          </li>
+          <li class="elements__item">
+            <img class="elements__images" src="images/dombai.jpg" alt="фото" />
+            <div class="elements__group">
+              <h2 class="elements__title">Карачаево-Ч...</h2>
+              <button class="elements__btn" type="button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy;2022. Олег Самойленко</p>
     </footer>
     <div class="popup">
-      <form class="popup__container">
+      <form class="popup__container" name="popup">
         <button
           class="popup__close"
           type="button"
@@ -107,22 +103,22 @@
             <input
               type="text"
               name="name"
-              placeholder=""
+              placeholder="введите имя"
               value="Жак-Ив Кусто"
               class="popup__item popup__item_el_heading"
             />
             <input
               type="text"
-              name="name"
-              placeholder=""
+              name="description"
+              placeholder="о себе"
               value="Исследователь океана"
               class="popup__item popup__item_el_subheading"
             />
           </fieldset>
-          <button class="popup__btn"></button>
+          <button class="popup__btn" type="button"></button>
         </div>
       </form>
     </div>
-    <script src="main.js"></script>
+    <script src="script/popup.js"></script>
   </body>
 </html>
