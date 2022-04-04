@@ -10,6 +10,7 @@
   <body class="page">
     <header class="header">
       <img class="header__logo" src="images/logo.svg" alt="логотип" />
+      <div class="header__line"></div>
     </header>
     <main class="main">
       <section class="profile">
@@ -84,41 +85,42 @@
         </ul>
       </section>
     </main>
-
     <footer class="footer">
       <p class="footer__copyright">&copy;2022. Олег Самойленко</p>
     </footer>
-    <div class="popup">
-      <form class="popup__container" name="popup">
+
+    <div class="popup popup_form_profile">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form
+          class="popup__form popup__input-container popup__input_texts"
+          name="popup__form"
+          action="#"
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="введите имя"
+            value="Жак-Ив Кусто"
+            class="popup__item popup__item_heading"
+          />
+          <input
+            type="text"
+            name="description"
+            placeholder="заполнить о себе"
+            value="Исследователь океана"
+            class="popup__item popup__item_subheading"
+          />
+
+          <button class="popup__btn" type="submit"></button>
+        </form>
         <button
           class="popup__close"
           type="button"
           aria-label="закрыть окно"
         ></button>
-        <div class="popup__main-container">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <fieldset
-            class="popup__input-container popup__input-container_ctrl_texts"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="введите имя"
-              value="Жак-Ив Кусто"
-              class="popup__item popup__item_el_heading"
-            />
-            <input
-              type="text"
-              name="description"
-              placeholder="заполнить о себе"
-              value="Исследователь океана"
-              class="popup__item popup__item_el_subheading"
-            />
-          </fieldset>
-          <button class="popup__btn" type="button"></button>
-        </div>
-      </form>
+      </div>
     </div>
-    <script src="script/popup.js"></script>
+    <script src="script/index.js"></script>
   </body>
 </html>

@@ -9,8 +9,8 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    top: -45px;
-    left: 100%;
+    top: -40px;
+    right: -40px;
     padding: 0;
     margin: 0;
 }
@@ -23,7 +23,7 @@
     .popup__close {
         width: 20px;
         height: 20px;
-        top: -30px;
+        top: -35px;
         left: 93%;
     }
 }
