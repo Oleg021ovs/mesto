@@ -2,16 +2,15 @@
     width: 150px;
     min-height: 50px;
     cursor: pointer;
-    background: transparent;
+    background-color: transparent;
     margin-left: auto;
     border-radius: 2px;
     padding: 0;
     border: none;
     border: 2px solid #fff;
-    background-image: url(../../../images/AddButton.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    text-align: center;
+    color: #fff;
+    
     
     
     
