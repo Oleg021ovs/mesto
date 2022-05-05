@@ -1,4 +1,4 @@
-.elements__btn {
+.elements__like-btn {
     background-image: url(../../../images/like-btn.svg);
     background-size: cover;
     width: 22px;
@@ -10,7 +10,11 @@
     padding: 0;
 }
 
-.elements__btn:hover {
+.elements__like-btn:hover {
     opacity: 0.5;
     
 }
+
+.elements__like-btn_active {
+    background-image: url(../../../images/btn-like.svg);    
+ }

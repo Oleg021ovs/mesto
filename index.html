@@ -45,22 +45,25 @@
             />
             <div class="elements__group">
               <h2 class="elements__title">Карачаевск</h2>
-              <button class="elements__btn" type="button"></button>
+              <button class="elements__like-btn" type="button"></button>
             </div>
+            <button class="element__btn-delete" type="button"></button>
           </li>
           <li class="elements__item">
             <img class="elements__images" src="images/elbrus.jpg" alt="фото" />
             <div class="elements__group">
               <h2 class="elements__title">Гора Эльбрус</h2>
-              <button class="elements__btn" type="button"></button>
+              <button class="elements__like-btn" type="button"></button>
             </div>
+            <button class="element__btn-delete" type="button"></button>
           </li>
           <li class="elements__item">
             <img class="elements__images" src="images/dombai.jpg" alt="фото" />
             <div class="elements__group">
               <h2 class="elements__title">Домбай</h2>
-              <button class="elements__btn" type="button"></button>
+              <button class="elements__like-btn" type="button"></button>
             </div>
+            <button class="element__btn-delete" type="button"></button>
           </li>
           <li class="elements__item">
             <img
@@ -70,22 +73,25 @@
             />
             <div class="elements__group">
               <h2 class="elements__title">Гора Эльбрус</h2>
-              <button class="elements__btn" type="button"></button>
+              <button class="elements__like-btn" type="button"></button>
             </div>
+            <button class="element__btn-delete" type="button"></button>
           </li>
           <li class="elements__item">
             <img class="elements__images" src="images/elbrus.jpg" alt="фото" />
             <div class="elements__group">
               <h2 class="elements__title">Домбай</h2>
-              <button class="elements__btn" type="button"></button>
+              <button class="elements__like-btn" type="button"></button>
             </div>
+            <button class="element__btn-delete" type="button"></button>
           </li>
           <li class="elements__item">
             <img class="elements__images" src="images/dombai.jpg" alt="фото" />
             <div class="elements__group">
               <h2 class="elements__title">Карачаево-Ч...</h2>
-              <button class="elements__btn" type="button"></button>
+              <button class="elements__like-btn" type="button"></button>
             </div>
+            <button class="element__btn-delete" type="button"></button>
           </li>
         </ul>
       </section>
@@ -113,7 +119,7 @@
             class="popup__item popup__item_type_subheading"
           />
 
-          <button class="popup__btn" type="submit"></button>
+          <button class="popup__btn" type="submit">сохранить</button>
         </form>
         <button
           class="popup__close"
@@ -122,6 +128,48 @@
         ></button>
       </div>
     </div>
+
+    <div class="popup popup_form_element">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popup__form" action="#">
+          <input
+            type="text"
+            name="name"
+            placeholder="Название"
+            class="popup__item popup__item_type_title"
+          />
+          <input
+            type="URL"
+            name="link-img"
+            placeholder="Ссылка на картинку"
+            class="popup__item popup__item_type_link"
+          />
+
+          <button class="popup__btn" type="submit">Создать</button>
+        </form>
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="закрыть окно"
+        ></button>
+      </div>
+    </div>
+    <template id="element-template">
+      <li class="elements__item">
+        <img
+          class="elements__images"
+          src=""
+          alt="фото"
+        />
+        <div class="elements__group">
+          <h2 class="elements__title"></h2>
+          <button class="elements__like-btn" type="button"></button>
+        </div>
+        <button class="element__btn-delete" type="button"></button>
+      </li>
+    </template>
+
     <script src="script/index.js"></script>
   </body>
 </html>
