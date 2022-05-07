@@ -112,6 +112,12 @@ function renderCard(name, link){
      event.target.classList.toggle('elements__like-btn_active');
    })
 
+   //удаление карточки
+
+   elementCards.querySelector('.element__btn-delete').addEventListener('click', function(event){
+     event.target.closest('.elements__item').remove();
+   })
+
   return elementCards;
 }
 
