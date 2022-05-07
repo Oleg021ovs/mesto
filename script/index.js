@@ -41,23 +41,36 @@ popupFormProfile.addEventListener("submit", formSubmitHandler);
 
 const profileAddButton = document.querySelector(".profile__add-button");
 const popupFormElement = document.querySelector(".popup_form_element");
-const popupFormPhoto = document.querySelector(".popup__form");
-const popupItemTypeTitle = document.querySelector(".popup__item_type_title");
-const popupItemTypeLink = document.querySelector(".popup__item_type_link");
+const popupFormPhoto = popupFormElement.querySelector(".popup__form");
+const popupItemTypeTitle = popupFormElement.querySelector(".popup__item_type_title");
+const popupItemTypeLink = popupFormElement.querySelector(".popup__item_type_link");
 const popupFormClose = popupFormElement.querySelector(".popup__close");
 
-profileAddButton.addEventListener("click", function () {
-  popupOpen(popupFormElement);
-  
-});
+const popupFormElementClose = popupFormElement.querySelector('.popup__btn');
 
-popupFormClose.addEventListener("click", function () {
+popupFormElementClose.addEventListener('click', function(){
   closePopup(popupFormElement);
-  popupFormElement.reset();
-});
+})
 
+profileAddButton.addEventListener('click', function(){
+  popupOpen(popupFormElement);
+  popupFormPhoto.reset();
+})
 
+popupFormClose.addEventListener('click', function() {
+  closePopup(popupFormElement);
+})
 
+function newElementSubmitCard(event){
+  event.preventDefault();
+
+elementsContainer.prepend(renderCard(popupItemTypeTitle.value, popupItemTypeLink.value));
+
+popupClose(popupFormElement);
+popupFormPhoto.reset();
+}
+
+popupFormElement.addEventListener('submit', newElementSubmitCard);
 const initialCards = [
   {
     name: "Архыз",
@@ -88,14 +101,7 @@ const initialCards = [
 const elementsContainer = document.querySelector('.elements__element');
 
 
-  function newElementSubmitCard(event){
-    event.preventDefault();
-
-  elementsContainer.prepend(renderCard(popupItemTypeTitle.value, popupItemTypeLink.value));
-
-  popupClose(popupFormElement);
-  popupFormPhoto.reset();
-  }
+  
 
 // клонирование карточек 
 function renderCard(name, link){
@@ -113,7 +119,6 @@ function renderCard(name, link){
    })
 
    //удаление карточки
-
    elementCards.querySelector('.element__btn-delete').addEventListener('click', function(event){
      event.target.closest('.elements__item').remove();
    })
@@ -127,4 +132,4 @@ initialCards.forEach((elementCards) => {
 });
 
 
-popupFormElement.addEventListener('submit', newElementSubmitCard);
+
