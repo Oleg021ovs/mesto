@@ -55,7 +55,7 @@ const popupFormClose = popupFormElement.querySelector(".popup__close");
 const popupFormElementClose = popupFormElement.querySelector(".popup__btn");
 
 //overlay form popup
-const formOverlay = document.querySelector(".popup_form_overlay");
+const formOverlay = document.querySelector(".popup__overlay");
 const overlayImages = formOverlay.querySelector(".popup__overlay-images");
 const overlayTitle = formOverlay.querySelector(".popup__overlay-title");
 const overlayClose = formOverlay.querySelector(".popup__close");
