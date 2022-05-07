@@ -54,17 +54,16 @@ const popupFormClose = popupFormElement.querySelector(".popup__close");
 
 const popupFormElementClose = popupFormElement.querySelector(".popup__btn");
 
-
 //overlay form popup
-const formOverlay = document.querySelector('.popup_form_overlay');
-const overlayImages = formOverlay.querySelector('.popup__overlay-images');
-const overlayTitle = formOverlay.querySelector('.popup__overlay-title');
-const overlayClose = formOverlay.querySelector('.popup__close');
+const formOverlay = document.querySelector(".popup_form_overlay");
+const overlayImages = formOverlay.querySelector(".popup__overlay-images");
+const overlayTitle = formOverlay.querySelector(".popup__overlay-title");
+const overlayClose = formOverlay.querySelector(".popup__close");
 
 //закрытие попап фото
-overlayClose.addEventListener('click', function() {
+overlayClose.addEventListener("click", function () {
   closePopup(formOverlay);
-})
+});
 
 popupFormElementClose.addEventListener("click", function () {
   closePopup(popupFormElement);
@@ -146,15 +145,16 @@ function renderCard(name, link) {
       event.target.closest(".elements__item").remove();
     });
 
-    //открытие фото в попапе
-    elementCards.querySelector('.elements__images').addEventListener('click', function(){
+  //открытие фото в попапе
+  elementCards
+    .querySelector(".elements__images")
+    .addEventListener("click", function () {
       overlayImages.src = link;
       overlayImages.alt = name;
       overlayTitle.textContent = name;
 
       popupOpen(formOverlay);
-      
-    })
+    });
 
   return elementCards;
 }
@@ -163,4 +163,3 @@ function renderCard(name, link) {
 initialCards.forEach((elementCards) => {
   elementsContainer.append(renderCard(elementCards.name, elementCards.link));
 });
-
