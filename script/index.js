@@ -55,7 +55,14 @@ popupFormClose.addEventListener("click", function () {
   closePopup(popupFormElement);
 });
 
-const elementsElement = document.querySelector(".elements__element");
+const  handlerSubmitAddForm = (event) => {
+  event.preventDefault();
+  renderCards({name: popupItemTypeTitle.value, link:  popupItemTypeLink.value});
+}
+
+popupFormPhoto.addEventListener('submit', handlerSubmitAddForm);
+
+
 const initialCards = [
   {
     name: "Архыз",
@@ -83,13 +90,23 @@ const initialCards = [
   },
 ];
 
-const elementBtnLike = document.querySelector('.elements__like-btn');
-const elementBtnDelete = document.querySelector('.element__btn-delete');
-// функция лайк карточки
-elementBtnLike.addEventListener('click', function(evt){
-  evt.target.classList.toggle('elements__like-btn_active');
-})
-// функция удаления карточки
-elementBtnDelete.addEventListener('click', function(evt){
-  evt.currentTarget.closest('.elements__item').remove();
-})
+const elementsContainer = document.querySelector('.elements__element');
+
+// клонирование карточек 
+function renderCard(name, link){
+  const cardTemplate = document.querySelector('#element-template').content;
+  const elementCards = cardTemplate.querySelector('.elements__item').cloneNode(true);
+  const elementImages = elementCards.querySelector('.elements__images');
+  const elementTitle = elementCards.querySelector('.elements__title');
+   elementTitle.textContent = name;
+   elementImages.src = link;
+   elementImages.alt = name;
+  return elementCards;
+}
+
+// перебор массива
+initialCards.forEach((elementCards) => {
+  elementsContainer.append(renderCard(elementCards.name, elementCards.link));
+});
+
+

@@ -5,9 +5,10 @@
     font-style: normal;
     color: #000000;
     margin: 0;
-    padding: 25px 0 31px 21px;
+    max-width: 195px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+   
       
 }
