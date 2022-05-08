@@ -9,10 +9,10 @@ const popupItemHeading = popupFormProfile.querySelector(
 const popupItemSubHeading = popupFormProfile.querySelector(
   ".popup__item_type_subheading"
 );
-const popupClose = popupFormProfile.querySelector(".popup__close");
+const closePopupProfile = popupFormProfile.querySelector(".popup__close");
 const popupForm = popupFormProfile.querySelector(".popup__form");
 
-const popupOpen = function (popup) {
+const openPopup = function (popup) {
   popup.classList.add("popup_opened");
 };
 
@@ -20,25 +20,33 @@ const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
 };
 
+// обработчик закрытие всех попапов на кнопку крестик!
+//спасибо супер функция!!!
+const popups = document.querySelectorAll(".popup");
+
+popups.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup__btn-close")) {
+      closePopup(popup);
+    }
+  });
+});
+
 profileButton.addEventListener("click", function () {
   popupItemHeading.value = pofileTitle.textContent;
   popupItemSubHeading.value = profileText.textContent;
-  popupOpen(popupFormProfile);
+  openPopup(popupFormProfile);
   popupForm.reset();
 });
 
-popupClose.addEventListener("click", function () {
-  closePopup(popupFormProfile);
-});
-
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   pofileTitle.textContent = popupItemHeading.value;
   profileText.textContent = popupItemSubHeading.value;
   closePopup(popupFormProfile);
 }
 
-popupFormProfile.addEventListener("submit", formSubmitHandler);
+popupFormProfile.addEventListener("submit", handleProfileFormSubmit);
 
 //шаблоны элементов форм
 const profileAddButton = document.querySelector(".profile__add-button");
@@ -50,32 +58,16 @@ const popupItemTypeTitle = popupFormElement.querySelector(
 const popupItemTypeLink = popupFormElement.querySelector(
   ".popup__item_type_link"
 );
-const popupFormClose = popupFormElement.querySelector(".popup__close");
-
-const popupFormElementClose = popupFormElement.querySelector(".popup__btn");
-
+const closePopupForm = popupFormElement.querySelector(".popup__close");
 //overlay form popup
 const formOverlay = document.querySelector(".popup_form_overlay");
 const overlayImages = formOverlay.querySelector(".popup__overlay-images");
 const overlayTitle = formOverlay.querySelector(".popup__overlay-title");
-const overlayClose = formOverlay.querySelector(".popup__close");
-
-//закрытие попап фото
-overlayClose.addEventListener("click", function () {
-  closePopup(formOverlay);
-});
-
-popupFormElementClose.addEventListener("click", function () {
-  closePopup(popupFormElement);
-});
+const closeOverlay = formOverlay.querySelector(".popup__close");
 
 profileAddButton.addEventListener("click", function () {
-  popupOpen(popupFormElement);
+  openPopup(popupFormElement);
   popupFormPhoto.reset();
-});
-
-popupFormClose.addEventListener("click", function () {
-  closePopup(popupFormElement);
 });
 
 function newElementSubmitCard(event) {
@@ -85,7 +77,7 @@ function newElementSubmitCard(event) {
     renderCard(popupItemTypeTitle.value, popupItemTypeLink.value)
   );
 
-  popupClose(popupFormElement);
+  closePopup(popupFormElement);
   popupFormPhoto.reset();
 }
 
@@ -153,7 +145,7 @@ function renderCard(name, link) {
       overlayImages.alt = name;
       overlayTitle.textContent = name;
 
-      popupOpen(formOverlay);
+      openPopup(formOverlay);
     });
 
   return elementCards;
@@ -163,3 +155,6 @@ function renderCard(name, link) {
 initialCards.forEach((elementCards) => {
   elementsContainer.append(renderCard(elementCards.name, elementCards.link));
 });
+
+//добавление Карточек из массива!
+renderCard(initialCards);
