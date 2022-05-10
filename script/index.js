@@ -21,7 +21,6 @@ const closePopup = function (popup) {
 };
 
 // обработчик закрытие всех попапов на кнопку крестик!
-//спасибо супер функция!!!
 const popups = document.querySelectorAll(".popup");
 
 popups.forEach((popup) => {
@@ -84,29 +83,30 @@ function newElementSubmitCard(event) {
 popupFormElement.addEventListener("submit", newElementSubmitCard);
 const initialCards = [
   {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+    name: "Краснодар",
+    link: "https://tvkrasnodar.ru/upload/iblock/807/807c1d8f022174dc1bc5d18b60ad301d.jpg",
   },
   {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+    name: "Стадион Краснодар",
+    link: "https://avatars.mds.yandex.net/get-zen_doc/3618266/pub_5f1a8d3298ca962935990bba_5f1a9c4a7461176a85719888/scale_1200",
   },
   {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+    name: "Сочи",
+    link: "https://sun9-67.userapi.com/impg/YN1orxo14JUN4BpYlyeca5L2TGbAvtqfRFYK-A/zSrkg6ahZDI.jpg?size=1080x1080&quality=90&proxy=1&sign=65f7b9175b582cda9ef14c49a72a48f7&c_uniq_tag=q6qy1TmW8bILPFrfpgz3rUwWMixKol8xm4BWnXHnl9g",
   },
   {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+    name: "Гузерипль Адыгея",
+    link: "https://www.multitour.ru/files/imgs/9c5364f76f7d29e7c5eb6f5336ce6ba19f4c5b8a.jpeg",
   },
   {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+    name: "Геленджик",
+    link: "https://avatars.mds.yandex.net/get-zen_doc/51081/pub_5ba8da9a584c1f00aa3da58d_5ba8ddf58ad01000a9324950/scale_1200",
   },
   {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+    name: "Прасковеевка",
+    link: "https://photocentra.ru/images/main69/692142_main.jpg",
   },
+  
 ];
 
 const elementsContainer = document.querySelector(".elements__element");
