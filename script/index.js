@@ -106,7 +106,21 @@ const initialCards = [
     name: "Прасковеевка",
     link: "https://photocentra.ru/images/main69/692142_main.jpg",
   },
-  
+
+  {
+    name: "Горячий ключ",
+    link: "https://allovertheus.ru/wp-content/uploads/0/c/0/0c02878b425566617bbaa9609ca3d026.jpg",
+  },
+ 
+  {
+    name: "Озеро Абрау дюрсо",
+    link: "https://a.d-cd.net/QCAAAgFCYOA-1920.jpg",
+  },
+
+  {
+    name: "Бугазская коса",
+    link: "https://top7travel.ru/wp-content/uploads/2021/07/8v7ap89v7897va89p.jpg",
+  },
 ];
 
 const elementsContainer = document.querySelector(".elements__element");
