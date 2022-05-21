@@ -12,13 +12,31 @@ const popupItemSubHeading = popupFormProfile.querySelector(
 const closePopupProfile = popupFormProfile.querySelector(".popup__close");
 const popupForm = popupFormProfile.querySelector(".popup__form");
 
+//зоткрытие попап
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupEscape);
+  document.addEventListener("mousedown", closePopupMouse);
 };
 
+// закрытие попап
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupEscape);
+  document.removeEventListener("mousedown", closePopupMouse);
 };
+
+function closePopupEscape(event) {
+  if (event.key === "Escape");
+  const openedPopup = document.querySelector(".popup_opened");
+  closePopup(openedPopup);
+}
+
+function closePopupMouse(event) {
+  if (event.target === event.currentTarget);
+
+  closePopup(event.target);
+}
 
 // обработчик закрытие всех попапов на кнопку крестик!
 const popups = document.querySelectorAll(".popup");
@@ -76,11 +94,19 @@ function newElementSubmitCard(event) {
     renderCard(popupItemTypeTitle.value, popupItemTypeLink.value)
   );
 
+  //function btnSubmitForm (inputList,  buttonElement) {
+  // buttonElement.classList.add('popup__btn_inactive');
+  //buttonElement.disabled = 'disabled';
+  //inputList.disabled = 'disabled';
+  //}
+
   closePopup(popupFormElement);
   popupFormPhoto.reset();
+  //btnSubmitForm(popupFormElement);
 }
 
 popupFormElement.addEventListener("submit", newElementSubmitCard);
+
 const initialCards = [
   {
     name: "Краснодар",
@@ -111,7 +137,7 @@ const initialCards = [
     name: "Горячий ключ",
     link: "https://allovertheus.ru/wp-content/uploads/0/c/0/0c02878b425566617bbaa9609ca3d026.jpg",
   },
- 
+
   {
     name: "Озеро Абрау дюрсо",
     link: "https://a.d-cd.net/QCAAAgFCYOA-1920.jpg",
@@ -173,26 +199,21 @@ initialCards.forEach((elementCards) => {
 //добавление Карточек из массива!
 renderCard(initialCards);
 
-
-
 //Валидация форм!!!!!!!!
-
-
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-  inputElement.classList.add('form__input_type_error');
+  inputElement.classList.add("form__input_type_error");
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__input-error_active');
+  errorElement.classList.add("form__input-error_active");
   console.log(errorElement);
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-  inputElement.classList.remove('form__input_type_error');
-  errorElement.classList.remove('form__input-error_active');
-  errorElement.textContent = '';
-  
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("form__input-error_active");
+  errorElement.textContent = "";
 };
 
 const checkInputValidity = (formElement, inputElement) => {
@@ -204,26 +225,27 @@ const checkInputValidity = (formElement, inputElement) => {
 };
 
 const hasInvalidInput = (inputList) => {
- return inputList.some((inputElement) => {
-  return !inputElement.validity.valid;
-})
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
 };
 
-const toggleButtonState = (inputList,  buttonElement) => {
+const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__btn_inactive');
-  }
-  else {
-    buttonElement.classList.remove('popup__btn_inactive');
+    buttonElement.classList.add("popup__btn_inactive");
+    buttonElement.disabled = "disabled";
+  } else {
+    buttonElement.classList.remove("popup__btn_inactive");
+    buttonElement.disabled = "";
   }
 };
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__item'));
-   const buttonElement = formElement.querySelector('.popup__btn');
+  const inputList = Array.from(formElement.querySelectorAll(".popup__item"));
+  const buttonElement = formElement.querySelector(".popup__btn");
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
+    inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
@@ -231,18 +253,13 @@ const setEventListeners = (formElement) => {
 };
 
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  const formList = Array.from(document.querySelectorAll(".popup__form"));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (event) {
+    formElement.addEventListener("submit", function (event) {
       event.preventDefault();
     });
-   
+
     setEventListeners(formElement);
   });
 };
 enableValidation();
-
-document.addEventListener('keydown',  (event) => {
-if(event.key === 'escape');
-alert('закрыть');
-});
