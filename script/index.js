@@ -1,4 +1,6 @@
 //шаблоны профиля форм
+const elementsContainer = document.querySelector(".elements__element");
+const cardTemplate = document.querySelector("#element-template").content;
 const profileButton = document.querySelector(".profile__edit-button");
 const pofileTitle = document.querySelector(".profile__title");
 const profileText = document.querySelector(".profile__text");
@@ -9,34 +11,39 @@ const popupItemHeading = popupFormProfile.querySelector(
 const popupItemSubHeading = popupFormProfile.querySelector(
   ".popup__item_type_subheading"
 );
-const closePopupProfile = popupFormProfile.querySelector(".popup__close");
-const popupForm = popupFormProfile.querySelector(".popup__form");
+const cardElement = popupFormProfile.querySelector(".popup__close");
+const profileForm = popupFormProfile.querySelector(".popup__form");
 
 //зоткрытие попап
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEscape);
-  document.addEventListener("mousedown", closePopupMouse);
+  //popup.addEventListener("mousedown", closePopupMouse);
 };
 
 // закрытие попап
+function closePopupEscape(event) {
+  if (event.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+function closePopupMouse(popups) {
+  Array.from(popups).forEach((popup) => {
+    popup.addEventListener("mousedown", (event) => {
+      if (event.target.classList.contains("popup_opened")) {
+        closePopup(popup);
+      }
+    });
+  });
+}
+
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEscape);
-  document.removeEventListener("mousedown", closePopupMouse);
+  //popup.removeEventListener("mousedown", closePopupMouse);
 };
-
-function closePopupEscape(event) {
-  if (event.key === "Escape");
-  const openedPopup = document.querySelector(".popup_opened");
-  closePopup(openedPopup);
-}
-
-function closePopupMouse(event) {
-  if (event.target === event.currentTarget);
-
-  closePopup(event.target);
-}
 
 // обработчик закрытие всех попапов на кнопку крестик!
 const popups = document.querySelectorAll(".popup");
@@ -53,7 +60,6 @@ profileButton.addEventListener("click", function () {
   popupItemHeading.value = pofileTitle.textContent;
   popupItemSubHeading.value = profileText.textContent;
   openPopup(popupFormProfile);
-  popupForm.reset();
 });
 
 function handleProfileFormSubmit(evt) {
@@ -94,15 +100,14 @@ function newElementSubmitCard(event) {
     renderCard(popupItemTypeTitle.value, popupItemTypeLink.value)
   );
 
-  //function btnSubmitForm (inputList,  buttonElement) {
-  // buttonElement.classList.add('popup__btn_inactive');
-  //buttonElement.disabled = 'disabled';
-  //inputList.disabled = 'disabled';
-  //}
-
+  function btnSubmitForm(popup) {
+    const btnSubmit = popup.querySelector(".popup__btn");
+    btnSubmit.classList.add("popup__btn_inactive");
+    btnSubmit.disabled = "disabled";
+  }
+  
   closePopup(popupFormElement);
-  popupFormPhoto.reset();
-  //btnSubmitForm(popupFormElement);
+  btnSubmitForm(popupFormElement);
 }
 
 popupFormElement.addEventListener("submit", newElementSubmitCard);
@@ -149,11 +154,8 @@ const initialCards = [
   },
 ];
 
-const elementsContainer = document.querySelector(".elements__element");
-
 // клонирование карточек
 function renderCard(name, link) {
-  const cardTemplate = document.querySelector("#element-template").content;
   const elementCards = cardTemplate
     .querySelector(".elements__item")
     .cloneNode(true);
@@ -190,7 +192,7 @@ function renderCard(name, link) {
 
   return elementCards;
 }
-
+closePopupMouse(popups);
 // перебор массива
 initialCards.forEach((elementCards) => {
   elementsContainer.append(renderCard(elementCards.name, elementCards.link));
@@ -198,68 +200,3 @@ initialCards.forEach((elementCards) => {
 
 //добавление Карточек из массива!
 renderCard(initialCards);
-
-//Валидация форм!!!!!!!!
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-  inputElement.classList.add("form__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-  console.log(errorElement);
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-  inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("popup__btn_inactive");
-    buttonElement.disabled = "disabled";
-  } else {
-    buttonElement.classList.remove("popup__btn_inactive");
-    buttonElement.disabled = "";
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".popup__item"));
-  const buttonElement = formElement.querySelector(".popup__btn");
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (event) {
-      event.preventDefault();
-    });
-
-    setEventListeners(formElement);
-  });
-};
-enableValidation();
