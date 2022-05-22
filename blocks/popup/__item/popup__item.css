@@ -9,7 +9,12 @@
     color: #000000;
     position: relative;
     margin-top: 30px;
+    width: 358px;
 }
+
+
+
+
 
 
 
@@ -21,4 +26,11 @@
      margin-right: 22px;
      
     }
+}
+
+@media screen and (max-width: 520px){
+    .popup__item{
+        width: 230px;
+        
+       }
 }
