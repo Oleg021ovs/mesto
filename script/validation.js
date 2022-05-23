@@ -1,13 +1,4 @@
 //Валидация форм!!!!!!!!
-const objSetting =({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__btn',
-    inactiveButtonClass: 'popup__btn_inactive',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
-});
-
 const formErrorElement = (formElement, inputElement) =>{
     return formElement.querySelector(`#error-${inputElement.id}`);
 };
@@ -41,10 +32,15 @@ const showInputError = (formElement, inputElement, errorMessage, Object) => {
     });
   };
 
+  const deactivateSubmitButton = (buttonElement, Object) => {
+    buttonElement.classList.add(Object.inactiveButtonClass);
+    buttonElement.disabled = 'disabled';
+  }
+
   const toggleButtonState = (inputList, buttonElement, Object) => {
     if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(Object.inactiveButtonClass);
-      buttonElement.disabled = "disabled";
+      buttonElement.disabled = 'disabled';
     } else {
       buttonElement.classList.remove(Object.inactiveButtonClass);
       buttonElement.disabled = "";

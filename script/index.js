@@ -1,3 +1,12 @@
+const objSetting =({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__btn',
+  inactiveButtonClass: 'popup__btn_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+});
+
 //шаблоны профиля форм
 const elementsContainer = document.querySelector(".elements__element");
 const cardTemplate = document.querySelector("#element-template").content;
@@ -29,15 +38,6 @@ function closePopupEscape(event) {
   }
 }
 
-function closePopupMouse(popups) {
-  Array.from(popups).forEach((popup) => {
-    popup.addEventListener("mousedown", (event) => {
-      if (event.target.classList.contains("popup_opened")) {
-        closePopup(popup);
-      }
-    });
-  });
-}
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
@@ -55,6 +55,18 @@ popups.forEach((popup) => {
     }
   });
 });
+
+function closePopupMouse(popups) {
+  Array.from(popups).forEach((popup) => {
+    popup.addEventListener("mousedown", (event) => {
+      if (event.target.classList.contains("popup_opened")) {
+        closePopup(popup);
+      }
+    });
+  });
+}
+
+
 
 profileButton.addEventListener("click", function () {
   popupItemHeading.value = pofileTitle.textContent;
@@ -89,9 +101,12 @@ const overlayTitle = formOverlay.querySelector(".popup__overlay-title");
 const closeOverlay = formOverlay.querySelector(".popup__close");
 
 profileAddButton.addEventListener("click", function () {
-  openPopup(popupFormElement);
   popupFormPhoto.reset();
+  openPopup(popupFormElement);
+  
 });
+
+const btnSubmit = popupFormElement.querySelector(".popup__btn");
 
 function newElementSubmitCard(event) {
   event.preventDefault();
@@ -99,15 +114,17 @@ function newElementSubmitCard(event) {
   elementsContainer.prepend(
     renderCard(popupItemTypeTitle.value, popupItemTypeLink.value)
   );
-
-  function btnSubmitForm(popup) {
-    const btnSubmit = popup.querySelector(".popup__btn");
-    btnSubmit.classList.add("popup__btn_inactive");
-    btnSubmit.disabled = "disabled";
-  }
   
   closePopup(popupFormElement);
-  btnSubmitForm(popupFormElement);
+  //btnSubmitForm(popupFormElement);
+  event.target.reset();
+  deactivateSubmitButton(btnSubmit, objSetting);
+  //function btnSubmitForm(popup) {
+   // const btnSubmit = popup.querySelector(".popup__btn");
+   // btnSubmit.classList.add('popup__btn_inactive');
+   // btnSubmit.disabled = "disabled";
+  //}
+  
 }
 
 popupFormElement.addEventListener("submit", newElementSubmitCard);
