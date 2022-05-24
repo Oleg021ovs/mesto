@@ -1,11 +1,11 @@
-const objSetting =({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__item',
-  submitButtonSelector: '.popup__btn',
-  inactiveButtonClass: 'popup__btn_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
-});
+const objSetting = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__item",
+  submitButtonSelector: ".popup__btn",
+  inactiveButtonClass: "popup__btn_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
 
 //шаблоны профиля форм
 const elementsContainer = document.querySelector(".elements__element");
@@ -27,7 +27,7 @@ const profileForm = popupFormProfile.querySelector(".popup__form");
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEscape);
-  //popup.addEventListener("mousedown", closePopupMouse);
+  
 };
 
 // закрытие попап
@@ -38,11 +38,10 @@ function closePopupEscape(event) {
   }
 }
 
-
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEscape);
-  //popup.removeEventListener("mousedown", closePopupMouse);
+  
 };
 
 // обработчик закрытие всех попапов на кнопку крестик!
@@ -65,8 +64,6 @@ function closePopupMouse(popups) {
     });
   });
 }
-
-
 
 profileButton.addEventListener("click", function () {
   popupItemHeading.value = pofileTitle.textContent;
@@ -103,7 +100,6 @@ const closeOverlay = formOverlay.querySelector(".popup__close");
 profileAddButton.addEventListener("click", function () {
   popupFormPhoto.reset();
   openPopup(popupFormElement);
-  
 });
 
 const btnSubmit = popupFormElement.querySelector(".popup__btn");
@@ -114,17 +110,9 @@ function newElementSubmitCard(event) {
   elementsContainer.prepend(
     renderCard(popupItemTypeTitle.value, popupItemTypeLink.value)
   );
-  
   closePopup(popupFormElement);
-  //btnSubmitForm(popupFormElement);
   event.target.reset();
   deactivateSubmitButton(btnSubmit, objSetting);
-  //function btnSubmitForm(popup) {
-   // const btnSubmit = popup.querySelector(".popup__btn");
-   // btnSubmit.classList.add('popup__btn_inactive');
-   // btnSubmit.disabled = "disabled";
-  //}
-  
 }
 
 popupFormElement.addEventListener("submit", newElementSubmitCard);

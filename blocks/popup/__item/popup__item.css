@@ -7,15 +7,19 @@
     line-height: 17px;
     font-weight: 400;
     color: #000000;
-    padding: 0 0 13px;
-    margin-top: 30px;
+    margin: 30px 0 13px 0;
     width: 100%;
+    max-width: 238px;
     box-sizing: border-box;
 }
 
-.popup__item:first-child{
+/*.popup__item:first-child{
     margin-top: 0;
+}*/
+
+@media screen and (min-width: 520px){
+    .popup__item {
+        max-width: 358px;
+    }
 }
-
-
 
