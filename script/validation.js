@@ -1,15 +1,25 @@
-
 //Валидация форм!!!!!!!!
-const formErrorElement = (formElement, inputElement) => {
-  return formElement.querySelector(`#error-${inputElement.id}`);
-};
+class FormValidator{
+  constructor(formData, formSelector){
+    this._formData = formData;
+    this._formSelector = formSelector;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._formData.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._formData.submitButtonSelector);
+  };
 
-const showInputError = (formElement, inputElement, errorMessage, Object) => {
-  const errorElement = formErrorElement(formElement, inputElement);
-  inputElement.classList.add(Object.inputErrorClass);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(Object.errorClass);
-};
+  _formErrorElement(inputElement) {
+    return this._formElement.querySelector(`#error-${inputElement.id}`);
+  };
+  const showInputError = (formElement, inputElement, errorMessage, Object) => {
+    const errorElement = formErrorElement(formElement, inputElement);
+    inputElement.classList.add(Object.inputErrorClass);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(Object.errorClass);
+  };
+
+}
+
+ 
 
 const hideInputError = (formElement, inputElement, Object) => {
   const errorElement = formErrorElement(formElement, inputElement);
