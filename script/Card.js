@@ -1,55 +1,50 @@
-export default class Card{
-  constructor(data, cardSelector){
+export default class Card {
+  constructor(data, cardSelector, ImagesCard) {
     this._name = data.name;
     this._link = data.link;
+
     this._cardSelector = cardSelector;
+    this._elementCards = this._getTemplate();
 
-     
+    this._elementTitle = this._elementCards.querySelector(".elements__title");
+    this._elementImages = this._elementCards.querySelector(".elements__images");
+    this._likeBtn = this._elementCards.querySelector(".elements__like-btn");
+    this._deleteBtn = this._elementCards.querySelector(".element__btn-delete");
+
+    this._ImagesCard = ImagesCard;
   }
-// клонирование карточек
-  _getTemplate(){
-    const cardTemplate = document.querySelector(this._cardSelector).content;
-    const elementCards = cardTemplate.querySelector(".elements__item").cloneNode(true);
-    const elementImages = elementCards.querySelector(".elements__images");
-    const elementTitle = elementCards.querySelector(".elements__title");
 
-    elementTitle.textContent = this._name;
-    elementImages.src = this._link;
-    elementImages.alt = this._name;
+  _getTemplate() {
+    const elementCards = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".elements__item")
+      .cloneNode(true);
 
     return elementCards;
   }
-//открытие фото в попапе
-  _handleOverlay(){
-    data.overlayImages.src = this._link;
-    data.overlayImages.alt = this._name;
-    data.overlayTitle.textContent = this._name;
-    openPopup(data.formOverlay);
-  }
 
-  //общий слушатель
-  _setEventListeners(){
-    const likeBtn = this._element.querySelector('.elements__like-btn');
-    const deleteBtn = this._element.querySelector('.element__btn-delete');
-    const images = this._element.querySelector('.elements__images');
-    images.addEventListener('click',() => {
-      this._handleOverlay();
+  _setEventListeners() {
+    this._likeBtn.addEventListener("click", () => {
+      this._likeBtn.classList.toggle("elements__like-btn_active");
     });
-    //лайк карточки
-    likeBtn.addEventListener('click',() => {
-      likeBtn.classList.toggle("elements__like-btn_active");
+
+    this._deleteBtn.addEventListener("click", () => {
+      this._elementCards.remove();
+      
     });
-    //удаление карточки
-    deleteBtn.addEventListener('click', () =>{
-      deleteBtn.closest(".elements__item").remove();
+
+    this._elementImages.addEventListener("click", () => {
+      this._ImagesCard(this._name, this._link);
     });
   }
 
-  renderCard(){
-    this._element = this._getTemplate();
+  generateCard() {
+    this._elementImages.alt = this._name;
+    this._elementTitle.textContent = this._name;
+    this._elementImages.src = this._link;
+
     this._setEventListeners();
-    
-    return this._element;
 
-  };
-};
+    return this._elementCards;
+  }
+}

@@ -38,6 +38,16 @@
       <section class="elements">
         <ul class="elements__element"></ul>
       </section>
+      <template id="element-template">
+        <li class="elements__item">
+          <img class="elements__images" src="#" alt="" />
+          <div class="elements__group">
+            <h2 class="elements__title"></h2>
+            <button class="elements__like-btn" type="button"></button>
+          </div>
+          <button class="element__btn-delete" type="button"></button>
+        </li>
+      </template>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;2022. Олег Самойленко</p>
@@ -47,7 +57,7 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form
-          class="popup__form"
+          class="popup__form popup__openform"
           id="form"
           name="popup__form"
           action="#"
@@ -100,7 +110,7 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form
-          class="popup__form"
+          class="popup__form popup__Elemform"
           id="formm"
           name="popup__form"
           action="#"
@@ -158,20 +168,6 @@
         ></button>
       </div>
     </div>
-    <template id="element-template">
-      <li class="elements__item">
-        <img class="elements__images" src="#" alt="" />
-        <div class="elements__group">
-          <h2 class="elements__title"></h2>
-          <button class="elements__like-btn" type="button"></button>
-        </div>
-        <button class="element__btn-delete" type="button"></button>
-      </li>
-    </template>
-
     <script type="module" src="./script/index.js"></script>
-    
-    
-    
   </body>
 </html>
