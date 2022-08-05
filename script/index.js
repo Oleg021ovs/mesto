@@ -1,10 +1,11 @@
-import Card from "./Card.js";
+import Card  from "./Card.js";
 import FormValidator from "./formValidator.js";
-//import { Section } from "./section.js";
+import Section from "./section.js";
+import PopupWithImage from "./popupWithImage.js";
 import{
   initialCards,
-  openPopup,
-  closePopup
+  //openPopup,
+  //closePopup
 } from '../utils/constants.js';
 
 //шаблоны профиля форм
@@ -48,35 +49,39 @@ const formValid = new FormValidator(objSetting, Elemform);
 //кнопка +
 profileAddButton.addEventListener("click", () => {
   popupFormPhoto.reset();
-  openPopup(popupFormElement);
+  open(popupFormElement);
 });
 
 //кнопка профиля
 profileButton.addEventListener("click", () => {
   popupItemHeading.value = pofileTitle.textContent;
   popupItemSubHeading.value = profileText.textContent;
-  openPopup(popupFormProfile);
+ open(popupFormProfile);
 });
+
 
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
   pofileTitle.textContent = popupItemHeading.value;
   profileText.textContent = popupItemSubHeading.value;
-  closePopup(popupFormProfile);
+  popupFormProfile.close();
   profilevalid.toggleButtonState();
 }
 
-const  newElementSubmitCard = (evt) =>
- {
+const  newElementSubmitCard = (evt) => {
   evt.preventDefault();
-  const element = {};
-  element.name = popupItemTypeTitle.value;
-  element.alt = popupItemTypeTitle.value;
-  element.link = popupItemTypeLink.value;
-  renderCard(element);
+  
+  const card = newElement({
+    name:  popupItemTypeTitle.value,
+    alt:  popupItemTypeTitle.value,
+    link:  popupItemTypeLink.value
+  })
+
+  section.addItem(card);
+  popupFormElement.close();
   evt.target.reset();
-  closePopup(popupFormElement);
   formValid.toggleButtonState();
+  
 }
 
 popupFormProfile.addEventListener("submit", handleProfileFormSubmit);
@@ -87,13 +92,27 @@ profilevalid.enableValidation();
 formValid.enableValidation();
 
 
-
 const newElement = (data) => {
-  const cardElement = new Card(data, "#element-template");
-  return cardElement.generateCard();
+  const cardElement = new Card(data, "#element-template", () => {
+alert('123');
+
+    imagePopup.open(data.name, data.link);
+  })
+   return cardElement.generateCard();
 }
 
-const renderCard = (element) => {
-  elementsContainer.prepend(newElement(element));
+
+const renderCard = (data, elementsContainer) => {
+const card = newElement(data)
+
+  elementsContainer.prepend(card);
+
 }
-initialCards.forEach(renderCard);
+
+const section = new Section({items: initialCards, renderer: renderCard}, ".elements__element")
+ 
+const imagePopup = new PopupWithImage(".popup_form_overlay");
+
+imagePopup.setEventListeners();
+section.renderItems();
+

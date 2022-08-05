@@ -35,10 +35,12 @@ const initialCards = [
     link: "https://top7travel.ru/wp-content/uploads/2021/07/8v7ap89v7897va89p.jpg",
   },
 ];
-const formOverlay = document.querySelector(".popup_form_overlay");
+//const formOverlay = document.querySelector(".popup_form_overlay");
+ //const popupImage = document.querySelector(".popup__overlay-images");
+ //const popupTitle = document.querySelector(".popup__overlay-title");
 //Функция открытия попапов
-const openPopup = (popup) => {
-  popup.classList.add("popup_opened");
+/*const openPopup = (popup) => {
+ popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEscape);
   popup.addEventListener("mousedown", closePopupMouse);
 }
@@ -72,11 +74,11 @@ popups.forEach((popup) => {
       closePopup(popup);
     }
   });
-});
+});*/
 
-export {
+export  {
   initialCards,
-  openPopup,
-  closePopup,
-  formOverlay
+  //openPopup,
+  //closePopup,
+  //formOverlay
 }
