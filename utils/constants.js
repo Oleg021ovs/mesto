@@ -79,6 +79,6 @@ popups.forEach((popup) => {
 export  {
   initialCards,
   //openPopup,
-  //closePopup,
+  //closePopup
   //formOverlay
 }

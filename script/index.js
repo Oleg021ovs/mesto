@@ -10,7 +10,7 @@ import{
 
 //шаблоны профиля форм
 const elementsContainer = document.querySelector(".elements__element");
-//const cardTemplate = document.querySelector("#element-template").content;
+const cardTemplate = document.querySelector("#element-template").content;
 const profileButton = document.querySelector(".profile__edit-button");
 const pofileTitle = document.querySelector(".profile__title");
 const profileText = document.querySelector(".profile__text");
@@ -49,14 +49,14 @@ const formValid = new FormValidator(objSetting, Elemform);
 //кнопка +
 profileAddButton.addEventListener("click", () => {
   popupFormPhoto.reset();
-  open(popupFormElement);
+  openPopup(popupFormElement);
 });
 
 //кнопка профиля
 profileButton.addEventListener("click", () => {
   popupItemHeading.value = pofileTitle.textContent;
   popupItemSubHeading.value = profileText.textContent;
- open(popupFormProfile);
+  openPopup(popupFormProfile);
 });
 
 
@@ -64,7 +64,7 @@ const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
   pofileTitle.textContent = popupItemHeading.value;
   profileText.textContent = popupItemSubHeading.value;
-  popupFormProfile.close();
+  closePopup(popupFormProfile);
   profilevalid.toggleButtonState();
 }
 
@@ -78,7 +78,7 @@ const  newElementSubmitCard = (evt) => {
   })
 
   section.addItem(card);
-  popupFormElement.close();
+  closePopup(popupFormElement);
   evt.target.reset();
   formValid.toggleButtonState();
   
@@ -94,9 +94,9 @@ formValid.enableValidation();
 
 const newElement = (data) => {
   const cardElement = new Card(data, "#element-template", () => {
-alert('123');
+//console.log('123');
 
-    imagePopup.open(data.name, data.link);
+imagePopup.openPopup(data.name, data.link);
   })
    return cardElement.generateCard();
 }
