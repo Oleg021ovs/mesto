@@ -2,6 +2,7 @@ import Card  from "./Card.js";
 import FormValidator from "./formValidator.js";
 import Section from "./section.js";
 import PopupWithImage from "./popupWithImage.js";
+import PopupWithForm from "./popupWithForm.js";
 import{
   initialCards,
   //openPopup,
@@ -48,15 +49,15 @@ const formValid = new FormValidator(objSetting, Elemform);
 
 //кнопка +
 profileAddButton.addEventListener("click", () => {
-  popupFormPhoto.reset();
-  openPopup(popupFormElement);
+  //popupFormPhoto.reset();
+  addCardPopup.openPopup();
 });
 
 //кнопка профиля
 profileButton.addEventListener("click", () => {
   popupItemHeading.value = pofileTitle.textContent;
   popupItemSubHeading.value = profileText.textContent;
-  openPopup(popupFormProfile);
+  addProfilePopup.openPopup();
 });
 
 
@@ -64,29 +65,29 @@ const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
   pofileTitle.textContent = popupItemHeading.value;
   profileText.textContent = popupItemSubHeading.value;
-  closePopup(popupFormProfile);
+  addProfilePopup.closePopup();
   profilevalid.toggleButtonState();
 }
 
-const  newElementSubmitCard = (evt) => {
-  evt.preventDefault();
+const  newElementSubmitCard = (data) => {
+  //evt.preventDefault();
   
   const card = newElement({
-    name:  popupItemTypeTitle.value,
-    alt:  popupItemTypeTitle.value,
-    link:  popupItemTypeLink.value
-  })
+    name: data["form-name"],  //popupItemTypeTitle.value,
+    alt: data["form-name"], //popupItemTypeTitle.value,
+    link: data["form-link"]//popupItemTypeLink.value
+  });
 
   section.addItem(card);
-  closePopup(popupFormElement);
-  evt.target.reset();
+  addCardPopup.closePopup();
+  //evt.target.reset();
   formValid.toggleButtonState();
   
 }
 
-popupFormProfile.addEventListener("submit", handleProfileFormSubmit);
+//popupFormProfile.addEventListener("submit", handleProfileFormSubmit);
 
-popupFormElement.addEventListener("submit", newElementSubmitCard);
+//popupFormElement.addEventListener("submit", newElementSubmitCard);
 
 profilevalid.enableValidation();
 formValid.enableValidation();
@@ -113,6 +114,10 @@ const section = new Section({items: initialCards, renderer: renderCard}, ".eleme
  
 const imagePopup = new PopupWithImage(".popup_form_overlay");
 
+const addCardPopup = new PopupWithForm(".popup_form_element", newElementSubmitCard);
+const addProfilePopup = new PopupWithForm(".popup_form_profile", handleProfileFormSubmit);
+addCardPopup.setEventListeners();
+addProfilePopup.setEventListeners();
 imagePopup.setEventListeners();
 section.renderItems();
 
