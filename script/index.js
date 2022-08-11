@@ -3,6 +3,7 @@ import FormValidator from "./formValidator.js";
 import Section from "./section.js";
 import PopupWithImage from "./popupWithImage.js";
 import PopupWithForm from "./popupWithForm.js";
+import UserInfo from "./userInfo.js";
 import{
   initialCards,
   //openPopup,
@@ -55,16 +56,23 @@ profileAddButton.addEventListener("click", () => {
 
 //кнопка профиля
 profileButton.addEventListener("click", () => {
-  popupItemHeading.value = pofileTitle.textContent;
-  popupItemSubHeading.value = profileText.textContent;
+const {name, job} = userInfo.getUserInfo()
+
+  popupItemHeading.value = name;
+  popupItemSubHeading.value = job;
+
+
   addProfilePopup.openPopup();
 });
 
 
-const handleProfileFormSubmit = (evt) => {
-  evt.preventDefault();
-  pofileTitle.textContent = popupItemHeading.value;
-  profileText.textContent = popupItemSubHeading.value;
+const handleProfileFormSubmit = (data) => {
+
+  const {name, description} = data
+  //evt.preventDefault();
+  //pofileTitle.textContent = name;
+  //profileText.textContent = description;
+  userInfo.setUserInfo(name, description);
   addProfilePopup.closePopup();
   profilevalid.toggleButtonState();
 }
@@ -120,4 +128,5 @@ addCardPopup.setEventListeners();
 addProfilePopup.setEventListeners();
 imagePopup.setEventListeners();
 section.renderItems();
+const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__text"});
 
