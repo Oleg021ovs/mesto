@@ -1,0 +1,17 @@
+.popup__input-group {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    max-width: 238px;
+    width: 100%;
+    border: none;
+    
+}
+
+@media screen and (min-width: 520px){
+    .popup__input-group{
+        max-width: 358px;
+    }
+    
+}
+
