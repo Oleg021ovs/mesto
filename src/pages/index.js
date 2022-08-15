@@ -1,10 +1,11 @@
-import './../pages/index.css';
-import Card from "./Card.js";
-import FormValidator from "./formValidator.js";
-import Section from "./section.js";
-import PopupWithImage from "./popupWithImage.js";
-import PopupWithForm from "./popupWithForm.js";
-import UserInfo from "./userInfo.js";
+import "./index.css";
+
+import Card from "../components/Card.js";
+import FormValidator from "../components/formValidator.js";
+import Section from "../components/section.js";
+import PopupWithImage from "../components/popupWithImage.js";
+import PopupWithForm from "../components/popupWithForm.js";
+import UserInfo from "../components/userInfo.js";
 import {
   initialCards,
   profileButton,
@@ -13,16 +14,10 @@ import {
   popupItemSubHeading,
   profileAddButton,
   Elemform,
-} from "./constants.js";
+  objSetting
+} from "../utils/constants.js";
 
-const objSetting = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__item",
-  submitButtonSelector: ".popup__btn",
-  inactiveButtonClass: "popup__btn_inactive",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-};
+
 const profilevalid = new FormValidator(objSetting, formProfile);
 const formValid = new FormValidator(objSetting, Elemform);
 
@@ -34,10 +29,9 @@ profileAddButton.addEventListener("click", () => {
 //кнопка профиля
 profileButton.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
-
   popupItemHeading.value = name;
   popupItemSubHeading.value = job;
-
+  
   addProfilePopup.openPopup();
 });
 
@@ -59,7 +53,8 @@ const newElementSubmitCard = (data) => {
   section.addItem(card);
   addCardPopup.closePopup();
 
-  formValid.toggleButtonState();
+  //formValid.toggleButtonState();
+  formValid.resetValidation();
 };
 
 profilevalid.enableValidation();

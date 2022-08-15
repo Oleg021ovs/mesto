@@ -10,6 +10,15 @@ const popupItemSubHeading = popupFormProfile.querySelector(
 const profileAddButton = document.querySelector(".profile__add-button");
 const popupFormElement = document.querySelector(".popup_form_element");
 const Elemform = popupFormElement.querySelector(".popup__Elemform");
+
+const objSetting = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__item",
+  submitButtonSelector: ".popup__btn",
+  inactiveButtonClass: "popup__btn_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
 const initialCards = [
   {
     name: "Стадион Краснодар",
@@ -55,5 +64,6 @@ export  {
   popupItemHeading,
   popupItemSubHeading,
   profileAddButton,
-  Elemform
+  Elemform,
+  objSetting
 }
