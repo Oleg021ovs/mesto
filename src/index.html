@@ -22,12 +22,12 @@
           alt="фото профиля"
         />
         <div class="profile__info">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <h1 class="profile__title"></h1>
           <button
             class="profile__edit-button popup-open"
             type="button"
           ></button>
-          <p class="profile__text">Исследователь океана</p>
+          <p class="profile__text"></p>
         </div>
         <button class="profile__add-button" type="button">
           <img
@@ -161,13 +161,68 @@
         ></button>
       </div>
     </div>
+
+    <div class="popup popup_confirm_form">
+      <div class="popup__container">
+        
+        <form class="popup__form" name="popup__form" novalidate>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="popup__btn" id="submit-btnn" type="submit">Да</button>
+        </form>
+        <button
+          class="popup__close popup__btn-close"
+          type="button"
+          aria-label="закрыть окно"
+        ></button>
+      </div>
+    </div>
+
+    <div class="popup popup_avatar_form">
+      <div class="popup__container">
+       
+        <form
+          class="popup__form popup__Elemform"
+          id="formm"
+          name="popup__form"
+          action="#"
+          novalidate
+        >
+        <h2 class="popup__title">Обновить аватар</h2>
+          
+            <input
+              name="form-link"
+              placeholder="https://somewebsite.com/someimage.jpg"
+              class="popup__item popup__item_type_link"
+              id="avatar-form"
+              required
+              type="url"
+            />
+            <span id="avatar-form-error" class="popup__form-error"></span>
+          
+
+          <button class="popup__btn" id="avatar-btn" type="submit">
+            Сохранить
+          </button>
+        </form>
+        <button
+          class="popup__close popup__btn-close"
+          type="button"
+          aria-label="закрыть окно"
+        ></button>
+      </div>
+    </div>
+
     <template id="element-template">
       <li class="elements__item">
         <img class="elements__images" src="#" alt="фото" />
         <div class="elements__group">
           <h2 class="elements__title"></h2>
-          <button class="elements__like-btn" type="button"></button>
+          <div class="elements__like">
+            <button class="elements__like-btn" type="button"></button>
+            <span class="elements__like-number">0</span>
+          </div>
         </div>
+
         <button class="element__btn-delete" type="button"></button>
       </li>
     </template>
