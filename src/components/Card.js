@@ -31,7 +31,7 @@ export default class Card {
   };
 
   generateCard() {
-this._element = this._getTemplate()
+this._element = this._getTemplate();
 this._elementImages = this._element.querySelector(".elements__images");
 this._element.querySelector(".elements__title").textContent = this._name;
 this._element.querySelector(".elements__like-number").textContent = this._likes.length;
