@@ -19,7 +19,7 @@ export default class UserInfo {
     setUserInfo(profile) {
         this._nameElement.textContent = profile.name;
         this._JobElement.textContent = profile.job;
-      this.Avatar(profile)
+      this.avatar(profile)
     }
 
     avatar(profile) {

@@ -31,6 +31,9 @@ const api = new Api({
   }
 });
 
+
+
+
 let userId;
 
 const profilevalid = new FormValidator(objSetting, formProfile);
@@ -41,6 +44,7 @@ profilevalid.enableValidation();
 formValid.enableValidation();
 popupAvatarValidator.enableValidation();
 
+
 const userInfo = new UserInfo({
   name: profileTitle,
   info: profileText,
@@ -49,6 +53,7 @@ const userInfo = new UserInfo({
 
 api.initialCardData()
 .then(([cards, user]) => {
+  
   userInfo.setUserInfo(user);
   userId = user._id;
   section.renderItems(cards)
@@ -56,13 +61,13 @@ api.initialCardData()
 
 const newElement = (data) => {
   const cardElement = new Card({data: data, 
-    handleCardClick: _=> imagePopup.openPopup(data),
-    handleLikeClick: _=> cardElement.handleLikeClick(),
-    handleDeleteClick: _=> {
+    handleCardClick: _ => imagePopup.openPopup(data),
+    handleLikeClick: _ => cardElement.handleLikeClick(),
+    handleDeleteClick: _ => {
       popupConfirmForm.submitActive( _=>{
         popupConfirmForm.loadingDelete(true);
         api.deleteCard(data._id)
-        .then( _=> {
+        .then( _ => {
           cardElement.handleDeleteClick();
           popupConfirmForm.closePopup();
         })
@@ -80,8 +85,9 @@ const newElement = (data) => {
 };
 
 const section = new Section(
-  { renderer: (item) => {
-    const cardElement = newElement(item)
+  { 
+    renderer: (item) => {
+    const cardElement = newElement(item);
     const card = cardElement.generateCard();
     section.addItem(card);
     
@@ -90,6 +96,7 @@ const section = new Section(
     },
     elementElements
 );
+
 
 const addCardPopup = new PopupWithForm({
   popupSelector: ".popup_form_element",
