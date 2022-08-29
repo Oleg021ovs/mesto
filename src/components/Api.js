@@ -1,7 +1,8 @@
-class Api {
+export default class Api {
   constructor({baseUrl, headers}){
       this.baseUrl = baseUrl;
       this.headers = headers;
+      
   }
 
   _response(res){
@@ -30,7 +31,7 @@ class Api {
       .then(this._response);
     }
 
-    userInf() {
+    infUser() {
       return fetch(this.baseUrl + "/users/me", {
         headers: this.headers,
       }).then(this._response);
@@ -75,12 +76,12 @@ class Api {
     }
 
     initialCardData() {
-      return Promise.all([this.getInitialCards(), this.userInf()])
+      return Promise.all([this.getInitialCards(), this.infUser()])
      
     }
 }
 
-export default Api;
+
 
 
 
