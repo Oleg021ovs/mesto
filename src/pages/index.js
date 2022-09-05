@@ -6,6 +6,7 @@ import Section from "../components/section.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
 import UserInfo from "../components/userInfo.js";
+import PopupConfirn from "../components/popupConfirmForm.js"
 import {
   profileButton,
   formProfile,
