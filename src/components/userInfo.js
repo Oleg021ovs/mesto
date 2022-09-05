@@ -1,46 +1,24 @@
 
 export default class UserInfo {
-    constructor(provileSelector) {
-        this._nameElement = provileSelector.name
-        this._JobElement = provileSelector.info
-  
-      this._Avatar = provileSelector.avatar
-    }
-  
-    getUserInfo() {
-      this._profileData = {
-        name: this._nameElement.textContent,
-        info: this._JobElement.textContent
-      }
-  
-      this._profileData;
-    }
-  
-    setUserInfo(profile) {
-        this._nameElement.textContent = profile.name;
-        this._JobElement.textContent = profile.job;
-      this.avatar(profile)
-    }
-
-    avatar(profile) {
-        this._Avatar.src = profile.avatar
-    }
+  constructor({profileNameSelector, profileJobSelector, profileAvatarSelector}) {
+  this._nameElement = document.querySelector(profileNameSelector);
+  this._JobElement = document.querySelector(profileJobSelector);
+  this._avatarElement = document.querySelector(profileAvatarSelector);
+  }
+  getUserInfo(){
+  return {
+      name: this._nameElement.textContent,
+      job: this._JobElement.textContent
+  }
   }
 
-/*export default class UserInfo {
-constructor({profileNameSelector, profileJobSelector}) {
-this._nameElement = document.querySelector(profileNameSelector);
-this._JobElement = document.querySelector( profileJobSelector);
-}
-getUserInfo(){
-return {
-    name: this._nameElement.textContent,
-    job: this._JobElement.textContent
-}
-}
-
-setUserInfo(title, job){
-    this._nameElement.textContent = title;
-    this._JobElement.textContent = job;
-}
-}*/
+  avatar(url){
+    this._avatarElement.src = url;
+  }
+  
+  setUserInfo(title, job, avatarPhoto){
+      this._nameElement.textContent = title;
+      this._JobElement.textContent = job;
+      if(avatarPhoto) this._avatarElement.src = avatarPhoto;
+  }
+  }

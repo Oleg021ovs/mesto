@@ -7,7 +7,7 @@ export default class PopupWithImage extends Popup {
     this._caption = this._popup.querySelector(".popup__overlay-title");
     
   }
-  openPopup({text, link}){
+  openPopup(text, link){
     this._image.src = link;
     this._image.alt = text;
     this._caption.textContent = text;

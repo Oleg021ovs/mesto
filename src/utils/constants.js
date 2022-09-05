@@ -42,6 +42,8 @@ const profileAvatar = document.querySelector(".profile__avatar");
 const elementTemplate = document.querySelector("#element-template");
 const elementElements = document.querySelector(".elements__element");
 const popupFormAvatar = document.querySelector(".popup_avatar_form");
+const btnAvatar = document.querySelector(".profile__avatar");
+const avatarForm = document.querySelector(".popup__AvatarForm");
 
 const objSetting = {
   formSelector: ".popup__form",
@@ -53,6 +55,7 @@ const objSetting = {
 };
 
 export  {
+  initialCards,
   popupFormAvatar,
   elementTemplate,
   elementElements,
@@ -65,5 +68,7 @@ export  {
   popupItemSubHeading,
   profileAddButton,
   Elemform,
+  btnAvatar,
+  avatarForm,
   objSetting
 }

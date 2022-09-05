@@ -16,18 +16,21 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img
-          class="profile__avatar"
+        <div class="profile__avatar">
+          <img
+          class="profile__avatar-img"
           src="<%=require('./images/image.jpg')%>"
           alt="фото профиля"
         />
+        </div>
+        
         <div class="profile__info">
-          <h1 class="profile__title"></h1>
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button
             class="profile__edit-button popup-open"
             type="button"
           ></button>
-          <p class="profile__text"></p>
+          <p class="profile__text">Исследователь океана</p>
         </div>
         <button class="profile__add-button" type="button">
           <img
@@ -181,7 +184,7 @@
       <div class="popup__container">
        
         <form
-          class="popup__form popup__Elemform"
+          class="popup__form popup__AvatarForm"
           id="formm"
           name="popup__form"
           action="#"
@@ -190,14 +193,14 @@
         <h2 class="popup__title">Обновить аватар</h2>
           
             <input
-              name="subTitle"
+              name="avatar-link"
               placeholder="ссылка на изображение"
               class="popup__item popup__item_type_link"
               id="avatar-form"
               required
               type="url"
             />
-            <span id="avatar-form-error" class="popup__form-error"></span>
+            <span id="error-form-link"  class="popup__form-error"></span>
           
 
           <button class="popup__btn" id="avatar-btn" type="submit">
