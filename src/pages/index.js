@@ -73,7 +73,7 @@ const section = new Section((card) => {
 const cardElement = newElement(card)
 section.addItem(cardElement);
 },
-elementElements
+".elements__element"
 );
 
 Promise.all([api.getUser(), api.getInitialCards()])
@@ -141,7 +141,7 @@ const newElementSubmitCard = (data) => {
 const handleAvatarSubmit = (data) => {
   addPopupAvatar.saveLoading(true)
   api.avatar(
-    data['avatar-form']
+    data['avatar-link']
   )
   .then(res=> {
     userInfo.avatar(res.avatar)
