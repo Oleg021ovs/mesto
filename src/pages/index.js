@@ -6,7 +6,7 @@ import Section from "../components/section.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
 import UserInfo from "../components/userInfo.js";
-import PopupConfirn from "../components/popupConfirmForm.js"
+import PopupConfirmForm from "../components/popupConfirmForm.js"
 import {
   profileButton,
   formProfile,
@@ -34,19 +34,17 @@ const api = new Api({
  }
 });
 
-let userId;
+let userId = null
 
 
 
 const newElement = (data) => {
-  const cardElement = new Card(data, "#element-template", userId, 
-  //открытие карточки попап  
-  handleCardClick, 
+  const cardElement = new Card(data, "#element-template", userId, handleCardClick, 
   // удаление карточки
-  (item) => {
+  (items) => {
     popupConfirmDelete.openPopup();
     popupConfirmDelete.submitActive(() =>{
-      api.deleteCard(item._id)
+      api.deleteCard(items._id)
       .then(() => {
         cardElement.deleteCard()
         popupConfirmDelete.closePopup()
@@ -86,7 +84,7 @@ Promise.all([api.getUser(), api.getInitialCards()])
   );
  section.renderItems(data)
 })
-.catch((err) =>{
+.catch((err) => {
   console.log(err);
 })
 
@@ -141,8 +139,7 @@ const newElementSubmitCard = (data) => {
 const handleAvatarSubmit = (data) => {
   addPopupAvatar.saveLoading(true)
   api.avatar(
-    data['avatar-link']
-  )
+    data['avatar-link'])
   .then(res=> {
     userInfo.avatar(res.avatar)
     addPopupAvatar.closePopup();
@@ -158,14 +155,7 @@ const handleAvatarSubmit = (data) => {
 const imagePopup = new PopupWithImage(".popup_form_overlay");
 
 
-const popupConfirmDelete = new PopupConfirn(".popup_confirm_form")
-
-
-//открытие попап аватар
-btnAvatar.addEventListener("click", () => {
-addPopupAvatar.openPopup();
-
-})
+const popupConfirmDelete = new PopupConfirmForm(".popup_confirm_form");
 
 const userInfo = new UserInfo({
   profileNameSelector: ".profile__title",
@@ -182,6 +172,15 @@ addCardPopup.setEventListeners();
 addProfilePopup.setEventListeners();
 imagePopup.setEventListeners();
 popupConfirmDelete.setEventListeners()
+
+//открытие попап аватар
+btnAvatar.addEventListener("click", () => {
+  avatarValid.resetValidation()
+addPopupAvatar.openPopup();
+
+})
+
+
 //кнопка +
 profileAddButton.addEventListener("click", () => {
   addCardPopup.openPopup();
@@ -193,6 +192,7 @@ profileButton.addEventListener("click", () => {
   popupItemHeading.value = name;
   popupItemSubHeading.value = job;
   
+  profilevalid.resetValidation()
   addProfilePopup.openPopup();
 });
 

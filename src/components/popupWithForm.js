@@ -12,31 +12,31 @@ export default class PopupWithForm extends Popup {
 
   _getInputValues() {
     
-    const values = {};
+    const values = {}
     this._inputs.forEach((input) => {
-      values[input.name] = input.value;
-    });
-    return values;
+      values[input.name] = input.value
+    })
+    return values
   }
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleSubmit(this._getInputValues());
-    });
+      this._handleSubmit(this._getInputValues())
+    })
   }
 
   closePopup() {
-    super.closePopup();
-    this._form.reset();
+    super.closePopup()
+    this._form.reset()
   }
 
   saveLoading(loading){
-    if(loading){
+    if (loading){
       this._popupSubmitBtn.textContent = 'Сохранение...';
 
-    }else{
+    } else{
       this._popupSubmitBtn.textContent = 'Сохранить';
     }
   }

@@ -1,11 +1,9 @@
-class Card {
+export default class Card {
   constructor(data, cardSelector, handleCardClick, handleLikeCard, handleDeleteCard, userId) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    this._handleLikeCard = handleLikeCard;
-    this._handleDeleteCard = handleDeleteCard;
     this._userId = userId;
     this._ownershipId = data.ownership._id;
     this._likes = data.likes
@@ -17,7 +15,10 @@ class Card {
     this._deleteBtn = this._cardElement.querySelector(".element__btn-delete");
     this._likeNumber = this._cardElement.querySelector(".elements__like-number");
 
+
     this._handleCardClick = handleCardClick;
+    this._handleLikeCard = handleLikeCard;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   deleteCard(){
@@ -25,13 +26,13 @@ class Card {
     this._cardElement = null;
   }
 
-  ownershipCard(){
+  _ownershipCard(){
     if(this._ownershipId !== this._userId){
       this._deleteCard.remove()
     }
   }
 
-  likeds = () =>{
+  likeds = () => {
     return this._likes.some((like) => like._id == this._userId)
   }
 
@@ -57,9 +58,10 @@ class Card {
     this._deleteBtn.addEventListener("click", () => {
       this._handleDeleteCard(this._data)
     });
+    
     this._elementImages.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
+      this._handleCardClick(this._name, this._link)
+    })
   }
 
   generateCard() {
@@ -69,9 +71,10 @@ class Card {
     this.numberLike(this._data);
     this._likeNumber.textContent = this._likes.length;
     this._ownershipCard();
+
     this._setEventListeners();
     return this._cardElement;
   }
 }
 
-export default Card;
+

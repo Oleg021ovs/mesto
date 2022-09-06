@@ -1,9 +1,9 @@
 export default class Api {
   constructor({baseUrl, headers}){
-      this.baseUrl = baseUrl;
-      this._userUrl = `${this.baseUrl}/users/me`
-      this._cardUrl = `${this.baseUrl}/cards`
-      this.headers = headers;
+      this._baseUrl = baseUrl;
+      this._userUrl = `${this._baseUrl}/users/me`
+      this._cardUrl = `${this._baseUrl}/cards`
+      this._headers = headers;
       
   }
 
@@ -18,14 +18,14 @@ export default class Api {
   getUser() {
     return fetch(this._userUrl, {
       method: 'GET',
-      headers: this.headers,
+      headers: this._headers,
     }).then(res => this._resp(res));
     }
 
     getInitialCards(){
-      return fetch(this._userUrl, {
+      return fetch(this._cardUrl, {
         method: 'GET',
-        headers: this.headers,
+        headers: this._headers,
        
       }).then(res => this._resp(res))
     }
@@ -33,7 +33,7 @@ export default class Api {
     profileUser(name, about) {
       return fetch(this._userUrl, {
         method: "PATCH",
-        headers: this.headers,
+        headers: this._headers,
         body: JSON.stringify({
           name,
           about
@@ -44,7 +44,7 @@ export default class Api {
     addCard({name, link}) {
       return fetch(this._cardUrl, {
         method: "POST",
-        headers: this.headers,
+        headers: this._headers,
         body: JSON.stringify({
           name: name,
           link: link,
@@ -56,7 +56,7 @@ export default class Api {
     deleteCard(id) {
       return fetch(this._cardUrl + `/${id}`, {
         method: "DELETE",
-        headers: this.headers,
+        headers: this._headers,
       }).then(res => this._resp(res));
     }
 
@@ -64,12 +64,12 @@ export default class Api {
       if(likeds){
         return fetch(this._cardUrl + `/${id}/likes`, {
           method: "DELETE",
-          headers: this.headers,
+          headers: this._headers,
         }).then(res => this._resp(res));
       }else {
         return fetch(this._cardUrl + `/${id}/likes`, {
           method: "PUT",
-          headers: this.headers,
+          headers: this._headers,
         }).then(res => this._resp(res));
       }
     }
@@ -77,7 +77,7 @@ export default class Api {
     avatar(avatar) {
       return fetch(`${this._userUrl}/avatar`, {
         method: "PATCH",
-        headers: this.headers,
+        headers: this._headers,
         body: JSON.stringify({
           avatar
         })

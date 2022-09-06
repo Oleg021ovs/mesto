@@ -1,6 +1,6 @@
-import Popup from "./popup.js";
+import Popup from "../components/popup.js";
 
-export default class PopupConfirn extends Popup {
+export default class PopupConfirmForm extends Popup {
 constructor(popupSelector){
     super(popupSelector);
     this._form = this._popup.querySelector(".popup__form");
