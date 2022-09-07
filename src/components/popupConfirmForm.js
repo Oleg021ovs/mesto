@@ -1,5 +1,5 @@
-import Popup from "../components/popup.js";
 
+/*import Popup from "../components/popup.js";
 export default class PopupConfirmForm extends Popup {
 constructor(popupSelector){
     super(popupSelector);
@@ -20,4 +20,4 @@ setEventListeners() {
     super.setEventListeners();
   }
 
-}
+}*/
