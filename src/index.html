@@ -71,8 +71,7 @@
               maxlength="40"
             />
             <span id="error-form-name" class="popup__form-error"></span>
-          </fieldset>
-          <fieldset class="popup__input-group">
+
             <input
               type="text"
               name="description"
@@ -85,6 +84,9 @@
             />
             <span id="error-form-description" class="popup__form-error"></span>
           </fieldset>
+          
+            
+          
 
           <button
             class="popup__btn popup__btn_inactive"
@@ -101,6 +103,9 @@
         ></button>
       </div>
     </div>
+
+
+
 
     <div class="popup popup_form_element">
       <div class="popup__container">
@@ -124,8 +129,7 @@
               maxlength="40"
             />
             <span id="error-formm-name" class="popup__form-error"></span>
-          </fieldset>
-          <fieldset class="popup__input-group">
+
             <input
               name="form-link"
               placeholder="Ссылка на картинку"
@@ -136,7 +140,6 @@
             />
             <span id="error-form-link" class="popup__form-error"></span>
           </fieldset>
-
           <button
             class="popup__btn popup__btn_inactive"
             id="submit-btnn"
@@ -153,6 +156,9 @@
       </div>
     </div>
 
+
+
+
     <div class="popup popup_form_overlay">
       <div class="popup__group">
         <img class="popup__overlay-images" src="#" alt="фото" />
@@ -167,16 +173,17 @@
 
     <div class="popup popup_confirm_form">
       <div class="popup__container">
-        
-        <form class="popup__form" name="popup__form" novalidate>
-          <h2 class="popup__title">Вы уверены?</h2>
-          <button class="popup__btn" id="submit-btnn" type="submit">Да</button>
-        </form>
         <button
           class="popup__close popup__btn-close"
           type="button"
           aria-label="закрыть окно"
         ></button>
+        <h2 class="popup__title popup__title-confirm">Вы уверены?</h2>
+        <form class="popup__form" name="popup__form" novalidate>
+          <input type="hidden" name="confirm-id" value="">
+          <button class="popup__btn" id="submit-btnn" type="submit">Да</button>
+        </form>
+        
       </div>
     </div>
 
@@ -185,23 +192,26 @@
        
         <form
           class="popup__form popup__AvatarForm"
+         
           action="#"
           novalidate
         >
         <h2 class="popup__title">Обновить аватар</h2>
-          
-            <input
-              name="avatar-link"
-              placeholder="ссылка на изображение"
-              class="popup__item popup__item_type_link"
-              id="avatar-link"
-              required
-              type="url"
-            />
-            <span id="error-form-link"  class="popup__form-error"></span>
+        <fieldset class="popup__input-group">
+          <input
+          name="avatar-link"
+          placeholder="ссылка на изображение"
+          class="popup__item popup__item_type_link"
+          id="avatar-link"
+          required
+          type="url"
+        />
+        <span id="error-avatar-link"  class="popup__form-error error-avatar-input-link"></span>
+        </fieldset>
+            
           
 
-          <button class="popup__btn popup__btn_inactive" id="avatar-btn" type="submit">
+          <button class="popup__btn popup__btn_inactive" id="avatar-btn" type="submit" disabled>
             Сохранить
           </button>
         </form>
@@ -220,7 +230,7 @@
           <h2 class="elements__title"></h2>
           <div class="elements__like">
             <button class="elements__like-btn" type="button"></button>
-            <span class="elements__like-number">0</span>
+            <span class="elements__like-counter">0</span>
           </div>
         </div>
 
