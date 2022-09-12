@@ -31,10 +31,10 @@ class Card {
   }
 
   _addLikeCard(){
-  this._cardElement.querySelector(".elements__like-btn").classList.add("elements__like-btn_active");
+    this._likeBtn.classList.add("elements__like-btn_active");
   }
   _removeLikeCard(){
-    this._cardElement.querySelector(".elements__like-btn").classList.remove("elements__like-btn_active");
+    this._likeBtn.classList.remove("elements__like-btn_active");
     }
 
   _setEventListeners() {

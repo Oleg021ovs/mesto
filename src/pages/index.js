@@ -32,7 +32,6 @@ const api = new Api({
 
 api.getProfile()
 .then(res => {
-//console.log('ответ', res)
 userInfo.setUserInfo(res.name, res.about)
 userId = res._id
 }).catch((err) => {
@@ -53,7 +52,36 @@ api.getInitialCards()
     });
     section.addItem(card)
   })
+}).catch((err) => {
+  console.log(err)
 })
+
+// Перепробовал 1000 вариантов и все без результата ((((((((( не получается обьеденить эти функции 
+// 10 часов просидел над этим все ломается !!! подскажите как тут быть?
+/*Promise.all([api.getProfile(), api.getInitialCards()])
+// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+.then(res => {
+  userInfo.setUserInfo(res.name, res.about)
+  userId = res._id
+  }).catch((err) => {
+    console.log(err)
+  })
+  .then(cardList => {
+    cardList.forEach(data => {
+      const card = newElement({
+        name: data.name,
+        link: data.link,
+        likes: data.likes,
+        id: data._id,
+        userId: userId,
+        ownerId: data.owner._id,
+        avatar: data.avatar
+      });
+      section.addItem(card)
+    })
+  }).catch((err) => {
+    console.log(err)
+  })*/
   
 const profilevalid = new FormValidator(objSetting, formProfile);
 const formValid = new FormValidator(objSetting, Elemform);
@@ -84,21 +112,17 @@ const handleProfileFormSubmit = (data) => {
   addProfilePopup.loading(true)
   api.editProfile(name, description)
 .then(() => {
-  //console.log('res', res)
   userInfo.setUserInfo(name, description);
   addProfilePopup.closePopup();
   profilevalid.toggleButtonState();
 }).catch((err) => {
   console.log(err)
+}).finally(() => {
+  addProfilePopup.loading(false)
 })
 };
 
 const newElementSubmitCard = (data) => {
-  //const card = newElement({
-    //name: data["form-name"],
-    //alt: data["form-name"],
-    //link: data["form-link"],
-  //});
 addCardPopup.loading(true)
 api.addCard(data["form-name"], data["form-link"])
 .then(res => {
@@ -110,17 +134,16 @@ api.addCard(data["form-name"], data["form-link"])
   id: res._id,
   userId: userId,
   ownerId: res.owner._id,
-  avatar: res.avatar
-  
+  avatar: res.avatar 
   });
   section.addItem(card);
   addCardPopup.closePopup();
   formValid.resetValidation();
 }).catch((err) => {
   console.log(err)
+}).finally(() => {
+  addCardPopup.loading(false)
 })
-  //formValid.toggleButtonState();
-  //formValid.resetValidation();
 };
 
 const handleAvatarForm = (data) => {
@@ -128,13 +151,12 @@ const handleAvatarForm = (data) => {
 api.addAvatar(data["avatar-link"]).then(res => {
   userInfo.setAvatar(res.avatar)
   popupFormAvatar.closePopup()
+}).catch((err) => {
+  console.log(err)
+}).finally(() => {
+  popupFormAvatar.loading(false)
 })
-
-  
-  //popupFormAvatar.closePopup()
-
 }
-
 
 profilevalid.enableValidation();
 formValid.enableValidation();
@@ -145,13 +167,13 @@ const newElement = (data) => {
     imagePopup.openPopup(data.name, data.link)
   },
      (id) => {
-      PopupConfirmForm.openPopup()
-      PopupConfirmForm.changeSubmitHandle(() => {
+      popupConfirmForm.openPopup()
+      popupConfirmForm.changeSubmitHandle(() => {
         api.deleteCard(id)
         .then(res => {
           
           cardElement.deleteCards()
-          PopupConfirmForm.closePopup()
+          popupConfirmForm.closePopup()
           
         }).catch((err) => {
           console.log(err)
@@ -163,13 +185,11 @@ const newElement = (data) => {
         api.deleteLike(id)
         .then(res => {
           cardElement.setLikes(res.likes)
-          //console.log(res)
         })
       } else {
         api.addLike(id)
         .then(res => {
           cardElement.setLikes(res.likes)
-          //console.log(res)
         }).catch((err) => {
           console.log(err)
         })
@@ -190,9 +210,7 @@ const section = new Section(
   ".elements__element"
 );
  
-
 const imagePopup = new PopupWithImage(".popup_form_overlay");
-
 const addCardPopup = new PopupWithForm(
   ".popup_form_element",
   newElementSubmitCard
@@ -202,17 +220,11 @@ const addProfilePopup = new PopupWithForm(
   handleProfileFormSubmit
 );
 
-const PopupConfirmForm = new PopupWithForm(".popup_confirm_form");
-//api.deleteCard().then(res => {
-  //console.log('res', res)
-//})
-//});
-
+const popupConfirmForm = new PopupWithForm(".popup_confirm_form");
 const popupFormAvatar = new PopupWithForm(".popup_avatar_form", handleAvatarForm);
 
-
 popupFormAvatar.setEventListeners();
-PopupConfirmForm.setEventListeners();
+popupConfirmForm.setEventListeners();
 addCardPopup.setEventListeners();
 addProfilePopup.setEventListeners();
 imagePopup.setEventListeners();
