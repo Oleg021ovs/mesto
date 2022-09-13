@@ -7,7 +7,6 @@ import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
 import UserInfo from "../components/userInfo.js";
 import {
-  initialCards,
   profileButton,
   formProfile,
   popupItemHeading,
@@ -18,6 +17,7 @@ import {
   avatarForm,
   objSetting
 } from "../utils/constants.js";
+import { Promise } from "core-js";
 
 let userId
 
@@ -28,46 +28,12 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-
-
-api.getProfile()
-.then(res => {
-userInfo.setUserInfo(res.name, res.about)
-userId = res._id
-}).catch((err) => {
-  console.log(err)
-})
-
-api.getInitialCards()
-.then(cardList => {
-  cardList.forEach(data => {
-    const card = newElement({
-      name: data.name,
-      link: data.link,
-      likes: data.likes,
-      id: data._id,
-      userId: userId,
-      ownerId: data.owner._id,
-      avatar: data.avatar
-    });
-    section.addItem(card)
-  })
-}).catch((err) => {
-  console.log(err)
-})
-
-// Перепробовал 1000 вариантов и все без результата ((((((((( не получается обьеденить эти функции 
-// 10 часов просидел над этим все ломается !!! подскажите как тут быть?
-/*Promise.all([api.getProfile(), api.getInitialCards()])
-// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
-.then(res => {
-  userInfo.setUserInfo(res.name, res.about)
-  userId = res._id
-  }).catch((err) => {
-    console.log(err)
-  })
-  .then(cardList => {
-    cardList.forEach(data => {
+//Спасибо ОГРОМНЕЙШЕЕ!!!!!!!!!!!!!!!!!
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData.name, userData.about, userData.avatar)
+    userId = userData._id
+    cards.forEach(data => {
       const card = newElement({
         name: data.name,
         link: data.link,
@@ -79,20 +45,15 @@ api.getInitialCards()
       });
       section.addItem(card)
     })
-  }).catch((err) => {
+  })
+  .catch(err => {
     console.log(err)
-  })*/
-  
-const profilevalid = new FormValidator(objSetting, formProfile);
-const formValid = new FormValidator(objSetting, Elemform);
-const avatarValid = new FormValidator(objSetting, avatarForm);
+  });
 
 //кнопка +
 profileAddButton.addEventListener("click", () => {
-  
   addCardPopup.openPopup();
 });
-
 //кнопка профиля
 profileButton.addEventListener("click", () => {
   const { name, job } = userInfo.getUserInfo();
@@ -101,12 +62,12 @@ profileButton.addEventListener("click", () => {
   
   addProfilePopup.openPopup();
 });
-
+//кнопка аватар
 profileAvatar.addEventListener("click", () => {
   avatarValid.resetValidation()
   popupFormAvatar.openPopup();
 })
-
+//функция редактирования профиля
 const handleProfileFormSubmit = (data) => {
   const { name, description } = data;
   addProfilePopup.loading(true)
@@ -121,7 +82,7 @@ const handleProfileFormSubmit = (data) => {
   addProfilePopup.loading(false)
 })
 };
-
+//функция добавления карточки
 const newElementSubmitCard = (data) => {
 addCardPopup.loading(true)
 api.addCard(data["form-name"], data["form-link"])
@@ -145,7 +106,7 @@ api.addCard(data["form-name"], data["form-link"])
   addCardPopup.loading(false)
 })
 };
-
+//функция обновления аватар
 const handleAvatarForm = (data) => {
   popupFormAvatar.loading(true)
 api.addAvatar(data["avatar-link"]).then(res => {
@@ -157,21 +118,17 @@ api.addAvatar(data["avatar-link"]).then(res => {
   popupFormAvatar.loading(false)
 })
 }
-
-profilevalid.enableValidation();
-formValid.enableValidation();
-avatarValid.enableValidation();
-
+//функция создания карточки
 const newElement = (data) => {
   const cardElement = new Card(data, "#element-template", () => {
     imagePopup.openPopup(data.name, data.link)
   },
-     (id) => {
+  //функция удаления карточки
+    (id) => {
       popupConfirmForm.openPopup()
       popupConfirmForm.changeSubmitHandle(() => {
         api.deleteCard(id)
-        .then(res => {
-          
+        .then(() => {
           cardElement.deleteCards()
           popupConfirmForm.closePopup()
           
@@ -180,6 +137,7 @@ const newElement = (data) => {
         })
       })
     },
+    //функция лайка и дизлайка карточки
     (id) => {
       if(cardElement.isLiked()) {
         api.deleteLike(id)
@@ -201,15 +159,14 @@ const newElement = (data) => {
 
 const renderCard = (data, elementsContainer) => {
   const card = newElement(data);
-
   elementsContainer.prepend(card);
 };
-
+//рендер карточек
 const section = new Section(
   { items: [], renderer: renderCard },
   ".elements__element"
 );
- 
+//эксемпляры классов
 const imagePopup = new PopupWithImage(".popup_form_overlay");
 const addCardPopup = new PopupWithForm(
   ".popup_form_element",
@@ -222,6 +179,19 @@ const addProfilePopup = new PopupWithForm(
 
 const popupConfirmForm = new PopupWithForm(".popup_confirm_form");
 const popupFormAvatar = new PopupWithForm(".popup_avatar_form", handleAvatarForm);
+const userInfo = new UserInfo({
+  profileNameSelector: ".profile__title",
+  profileJobSelector: ".profile__text",
+  profileAvatarSelector: ".profile__avatar-img"
+});
+
+const profilevalid = new FormValidator(objSetting, formProfile);
+const formValid = new FormValidator(objSetting, Elemform);
+const avatarValid = new FormValidator(objSetting, avatarForm);
+
+profilevalid.enableValidation();
+formValid.enableValidation();
+avatarValid.enableValidation();
 
 popupFormAvatar.setEventListeners();
 popupConfirmForm.setEventListeners();
@@ -229,8 +199,3 @@ addCardPopup.setEventListeners();
 addProfilePopup.setEventListeners();
 imagePopup.setEventListeners();
 section.renderItems();
-const userInfo = new UserInfo({
-  profileNameSelector: ".profile__title",
-  profileJobSelector: ".profile__text",
-  profileAvatarSelector: ".profile__avatar-img"
-});

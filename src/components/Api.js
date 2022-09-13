@@ -1,10 +1,8 @@
 export default class Api {
-   
   constructor({ baseUrl, headers }) {
   // тело конструктора
   this._baseUrl = baseUrl;
   this._headers = headers;
-  
 }
 
 _checkResponse(res) {
@@ -15,19 +13,16 @@ _checkResponse(res) {
 return Promise.reject(`Ошибка ${res.status}`);
 }
 
-
 getProfile(){
  return fetch(`${this._baseUrl}/users/me`,{
   headers: this._headers 
   }).then(this._checkResponse)
- 
 }
 
 getInitialCards() {
   return fetch(`${this._baseUrl}/cards`,{
     headers: this._headers 
     }).then(this._checkResponse)
-   
 }
 
 editProfile(name, about) {
@@ -39,7 +34,6 @@ editProfile(name, about) {
       about
     })
     }).then(this._checkResponse)
-   
   
 }
 
@@ -52,8 +46,6 @@ addCard(name, link) {
       link
     })
     }).then(this._checkResponse)
-   
-  
 }
 
 deleteCard(id) {
@@ -62,7 +54,6 @@ deleteCard(id) {
     headers: this._headers,
     
     }).then(this._checkResponse).catch(console.log)
-  
   
 }
 
@@ -73,7 +64,6 @@ deleteLike(id) {
     
     }).then(this._checkResponse)
    
-  
 }
 
 addLike(id) {
@@ -82,8 +72,7 @@ addLike(id) {
     headers: this._headers,
     
     }).then(this._checkResponse) 
-   
-  
+    
 }
 
 addAvatar(avatar){
@@ -95,8 +84,6 @@ addAvatar(avatar){
     })
     
     }).then(this._checkResponse)
-   
   }
 
-// другие методы работы с API
 }

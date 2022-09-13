@@ -6,15 +6,12 @@ class Card {
     this._id = data.id;
     this._userId = data.userId;
     this._ownerId = data.ownerId;
-
     this._cardSelector = cardSelector;
-
     this._cardElement = this._getTemplate();
     this._likeBtn = this._cardElement.querySelector(".elements__like-btn");
     this._elementImages = this._cardElement.querySelector(".elements__images");
     this._elementTitle = this._cardElement.querySelector(".elements__title");
     this._deleteBtn = this._cardElement.querySelector(".element__btn-delete");
-    //this._likeCount = this._cardElement.querySelector(".elements__like-counter")
     this._likeCount = this._cardElement.querySelector(".elements__like-counter");
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -38,15 +35,9 @@ class Card {
     }
 
   _setEventListeners() {
-    this._likeBtn.addEventListener("click", () => this._handleLikeClick(this._id))
-      //this._likeBtn.classList.toggle("elements__like-btn_active");
-    //});
-    this._deleteBtn.addEventListener("click", () => this._handleDeleteClick(this._id));
-      //this._cardElement.remove();
-      
-    this._elementImages.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
+  this._likeBtn.addEventListener("click", () => this._handleLikeClick(this._id))
+  this._deleteBtn.addEventListener("click", () => this._handleDeleteClick(this._id));
+  this._elementImages.addEventListener("click", () => {this._handleCardClick(this._name, this._link);});
   }
 
   isLiked(){
@@ -59,13 +50,11 @@ class Card {
     this._cardElement = null;
   }
   
-
   setLikes(newLikes){
     console.log('newLikes', newLikes)
     this._likes = newLikes
     this._likeCount.textContent = this._likes.length
-    //this._likeBtn.classList.toggle("elements__like-btn_active")
-    
+   
     if(this.isLiked()) {
       this._addLikeCard()
     } else {
