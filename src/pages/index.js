@@ -28,7 +28,7 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-//Спасибо ОГРОМНЕЙШЕЕ!!!!!!!!!!!!!!!!!
+
 Promise.all([api.getProfile(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar)
